@@ -28,6 +28,10 @@ class Note extends Component {
     });
   }
 
+  handleDelete = () => {
+    this.props.deleteHandler(this.props.id);
+  }
+
   render(){
     let titleElement, bodyElement, buttonArea; 
     if (this.state.editMode){
@@ -59,7 +63,7 @@ Note.defaultProps = {
     body: "A cool body",
   };
    
-  Note.propTypes = {
+Note.propTypes = {
     title: PropTypes.string
   };
 

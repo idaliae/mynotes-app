@@ -7,27 +7,15 @@ class Board extends Component {
     super();
 
     this.state = {
-        notes: [
-            {
-              title: "Class Notes",
-              body: "Always use constructors when extending another class"
-            },
-            {
-              title: "My New Address",
-              body: "2001 N Lonhill Phoenix, AZ 81234"
-            },
-            {
-              title: "React Notes",
-              body: "Everything in React is a component"
-            }
-          ]
+        notes: []
     }
   }
 
-  addNote() {
+  addNote = () => {
     let notes = this.state.notes;
     notes.push(
         {
+            id: Date.now(),
             title: "New Note Title",
             body: "New Note Body"
         }
@@ -35,6 +23,20 @@ class Board extends Component {
     this.setState(
         {
             notes
+        }
+    );
+  }
+
+  deleteNote = (id) => {
+    let newNoteArr = this.state.notes;
+    newNoteArr.map((note, index) => {
+        if (id === note.id) {
+            newNoteArr.splice(index, 1);
+        }
+    });
+    this.setState(
+        {
+            notes: newNoteArr
         }
     );
   }
@@ -49,12 +51,12 @@ class Board extends Component {
         <div className="div-board">
           <div className="row">
             {this.state.notes.map(note => {
-                return <Note title={note.title} body={note.body} />
+                return <Note key={note.id} id={note.id} deleteHandler={this.deleteNote} />
             })}
           </div>
         </div>
         <div>
-          <button className="btn btn-success add-button" onClick={this.addNote.bind(this)}>Add</button>
+          <button className="btn btn-success add-button" onClick={this.addNote}>Add</button>
         </div>
       </div>
     );
