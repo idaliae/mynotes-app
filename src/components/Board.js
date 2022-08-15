@@ -5,6 +5,14 @@ import Note from './Note';
 class Board extends Component {
   constructor() {
     super();
+
+    this.state = {
+        notes: []
+    }
+  }
+
+  handleClick() {
+    console.log("This is the click!");
   }
 
   render() {
@@ -12,9 +20,9 @@ class Board extends Component {
       <div>
         <div className="div-board">
           <div className="row">
-            <Note />
-            <Note />
-            <Note />
+            <Note handleClick={this.handleClick} title="Title One" body="Body One"/>
+            <Note title="Title Two" body="Body Two"/>
+            <Note title="Title Three" body="Body Three"/>
           </div>
         </div>
         <div>
